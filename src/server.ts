@@ -24,9 +24,9 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
     const file = await filterImageFromURL(image_url);
 
-    deleteLocalFiles([image_url])
-
-    res.sendFile(file);
+    res.sendFile(file,(err)=>{
+      deleteLocalFiles([file])
+    });
   });
 
   /**************************************************************************** */
@@ -39,7 +39,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     res.send("try GET /filteredimage?image_url={{}}")
   } );
   
-
+    
   // Start the Server
   app.listen( port, () => {
       console.log( `server running http://localhost:${ port }` );
